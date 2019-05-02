@@ -4,127 +4,142 @@
 <head>
 
 
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+        integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
     <script src="https://d3js.org/d3.v4.min.js"></script>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
 
     <style>
-
         .bar {
             fill: #FF6600;
         }
+
         .bar:hover {
-            fill:#Cecece;
+            fill: #Cecece;
         }
 
         .axis--x path {
-            display:none;
+            display: none;
         }
-
     </style>
     <script>
-        $( function() {
-            $( document ).tooltip()
-        } );
+        $(function () {
+            $(document).tooltip()
+        });
     </script>
 </head>
 
 <body>
-<svg width="560" height="500"></svg>
+    <svg width="560" height="500"></svg>
 
 
-        <script>
-
-
-                var data = [
-                    {
-                        day:"Monday",
-                        mileage: 4
-                    },
-                    {
-                        day:"Tuesday",
-                        mileage: 4
-                    },
-                    {
-                        day:"Wednesday",
-                        mileage: 0
-                    },
-                    {
-                        day:"Thursday",
-                        mileage: 8
-                    },
-                    {
-                        day:"Friday",
-                        mileage: 5
-                    },
-                    {
-                        day:"Saturday",
-                        mileage: 4
-                    },
-                    {
-                        day:"Sunday",
-                        mileage: 0
-                    }
-                ];
+    <script>
+        var data = [{
+                day: "Monday",
+                mileage: 4
+            },
+            {
+                day: "Tuesday",
+                mileage: 4
+            },
+            {
+                day: "Wednesday",
+                mileage: 0
+            },
+            {
+                day: "Thursday",
+                mileage: 8
+            },
+            {
+                day: "Friday",
+                mileage: 5
+            },
+            {
+                day: "Saturday",
+                mileage: 4
+            },
+            {
+                day: "Sunday",
+                mileage: 0
+            }
+        ];
 
 
 
-                //Create SVG element
-                var svg = d3.select("svg"),
-                    margin = {top: 30, right: 40, bottom: 30, left: 40},
-                    width = +svg.attr("width") - margin.left - margin.right,
-                    height = +svg.attr("height") - margin.top - margin.bottom;;
+        //Create SVG element
+        var svg = d3.select("svg"),
+            margin = {
+                top: 30,
+                right: 40,
+                bottom: 30,
+                left: 40
+            },
+            width = +svg.attr("width") - margin.left - margin.right,
+            height = +svg.attr("height") - margin.top - margin.bottom;;
 
-                //Create the x-scale
-                var x = d3.scaleBand()
-                    .domain(data.map(function(d){ return d.day}))
-                    .range([0, width*0.99]).padding(.1);
+        //Create the x-scale
+        var x = d3.scaleBand()
+            .domain(data.map(function (d) {
+                return d.day
+            }))
+            .range([0, width * 0.99]).padding(.1);
 
-                //create the y-scale
-                var y = d3.scaleLinear().rangeRound([height, 0]);
+        //create the y-scale
+        var y = d3.scaleLinear().rangeRound([height, 0]);
 
-                //define the graph
-                var g = svg.append("g")
-                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        //define the graph
+        var g = svg.append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-                //define the axis domain
-                x.domain(data.map(function(d) { return d.day; })); // takes the days of the week from the json object
-                y.domain([0, d3.max(data, function(d) { return d.mileage; })]); //based on the mileage
+        //define the axis domain
+        x.domain(data.map(function (d) {
+            return d.day;
+        })); // takes the days of the week from the json object
+        y.domain([0, d3.max(data, function (d) {
+            return d.mileage;
+        })]); //based on the mileage
 
-                //call the x-axis
-                g.append("g")
-                    .attr("class", "axis axis--x")
-                    .attr("transform", "translate(0," + height + ")")
-                    .call(d3.axisBottom(x));
+        //call the x-axis
+        g.append("g")
+            .attr("class", "axis axis--x")
+            .attr("transform", "translate(0," + "height" + ")")
+            .call(d3.axisBottom(x));
 
-                //call the y-axis
-                g.append("g")
-                    .attr("class", "axis axis--y")
-                    .call(d3.axisLeft(y).ticks(10))
-                    .append("text")
-                    .attr("transform", "rotate(-90)")
-                    .attr("y", 6)
-                    .attr("dy", "0.71em")
-                    .attr("text-anchor", "end")
-                    .text("Weekly Mileage");
+        //call the y-axis
+        g.append("g")
+            .attr("class", "axis axis--y")
+            .call(d3.axisLeft(y).ticks(10))
+            .append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 6)
+            .attr("dy", "0.71em")
+            .attr("text-anchor", "end")
+            .text("Weekly Mileage");
 
-                //populate the bars
-                g.selectAll(".bar")
-                    .data(data)
-                    .enter().append("rect")
-                    .attr("class", "bar")
-                    .attr("x", function(d) { return x(d.day); })
-                    .attr("y", function(d) { return y(d.mileage); })
-                    .attr("width", x.bandwidth())
-                    .attr("height", function(d) { return height - y(d.mileage); })
-                    .attr("alt", function (d) {return d.mileage})
-                    .attr("title", function (d) {return d.mileage});
-
-
-
-
-        </script>
+        //populate the bars
+        g.selectAll(".bar")
+            .data(data)
+            .enter().append("rect")
+            .attr("class", "bar")
+            .attr("x", function (d) {
+                return x(d.day);
+            })
+            .attr("y", function (d) {
+                return y(d.mileage);
+            })
+            .attr("width", x.bandwidth())
+            .attr("height", function (d) {
+                return height - y(d.mileage);
+            })
+            .attr("alt", function (d) {
+                return d.mileage
+            })
+            .attr("title", function (d) {
+                return d.mileage
+            });
+    </script>
 
 
 </body>
