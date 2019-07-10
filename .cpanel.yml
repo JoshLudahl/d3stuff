@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/ludafghe/truckermilf
+    - export DEPLOYPATH=/home/ludafghe/repositories/d3stuff
     - /bin/cp -R images $DEPLOYPATH
